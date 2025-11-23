@@ -104,7 +104,7 @@ export default function RecipesPage() {
         <View className="tags-section">
           <Text className="tags-title">标签筛选：</Text>
           <View className="tags-list">
-            {allTags.slice(0, 8).map(tag => (
+            {allTags.slice(0, 10).map(tag => (
               <View
                 key={tag}
                 className={`tag-item ${selectedTags.includes(tag) ? 'active' : ''}`}

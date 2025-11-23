@@ -103,7 +103,7 @@ export default function MenuSelectPage() {
       
       <View className="categories">
         <View className="categories-grid">
-          {categories.slice(0, 8).map(cat => (
+          {categories.map(cat => (
             <View
               key={cat.id}
               className={`category-item ${activeCategory === cat.id ? 'active' : ''}`}
@@ -119,7 +119,7 @@ export default function MenuSelectPage() {
         <View className="tags-section">
           <Text className="tags-title">标签筛选：</Text>
           <View className="tags-grid">
-            {allTags.slice(0, 8).map(tag => (
+            {allTags.slice(0, 10).map(tag => (
               <View
                 key={tag}
                 className={`tag-item ${selectedTags.includes(tag) ? 'active' : ''}`}

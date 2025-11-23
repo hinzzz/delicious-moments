@@ -106,16 +106,16 @@
     
     .tags-list {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: $spacing-sm;
+      grid-template-columns: repeat(5, 1fr);
+      gap: $spacing-xs;
       max-height: 160rpx;
       overflow: hidden;
       
       .tag-item {
-        padding: 8rpx $spacing-xs;
+        padding: 6rpx 4rpx;
         background: rgba(255, 217, 61, 0.15);
         border-radius: $radius-lg;
-        font-size: 22rpx;
+        font-size: 20rpx;
         color: $text-sub;
         border: 2rpx solid transparent;
         text-align: center;
@@ -233,7 +233,7 @@
     right: $spacing-lg;
     width: 100rpx;
     height: 100rpx;
-    background: $primary;
+    background: linear-gradient(135deg, #FFE680, #FFD966);
     border-radius: 50%;
     @include flex-center;
     box-shadow: $shadow-float;

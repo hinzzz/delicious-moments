@@ -47,21 +47,21 @@
   }
   
   .categories {
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-sm $spacing-lg;
     background: white;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
     
     .categories-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: $spacing-sm;
+      gap: $spacing-xs;
       
       .category-item {
-        padding: $spacing-sm $spacing-xs;
+        padding: $spacing-xs 4rpx;
         background: $bg;
         border-radius: $radius-md;
         text-align: center;
-        font-size: 24rpx;
+        font-size: 22rpx;
         font-weight: bold;
         color: $text-sub;
         overflow: hidden;
@@ -77,28 +77,28 @@
   }
   
   .tags-section {
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-sm $spacing-lg;
     background: white;
     margin-bottom: $spacing-md;
     
     .tags-title {
       display: block;
-      font-size: 24rpx;
+      font-size: 22rpx;
       color: $text-sub;
-      margin-bottom: $spacing-sm;
+      margin-bottom: $spacing-xs;
     }
     
     .tags-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: $spacing-sm;
+      grid-template-columns: repeat(5, 1fr);
+      gap: $spacing-xs;
       
       .tag-item {
-        padding: 8rpx $spacing-xs;
+        padding: 6rpx 4rpx;
         background: $bg;
         border-radius: $radius-lg;
         text-align: center;
-        font-size: 22rpx;
+        font-size: 20rpx;
         color: $text-sub;
         border: 2rpx solid transparent;
         overflow: hidden;
