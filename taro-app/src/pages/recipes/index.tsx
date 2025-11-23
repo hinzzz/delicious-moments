@@ -1,12 +1,14 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Input, Image } from '@tarojs/components'
 import { useEffect, useState } from 'react'
 import Taro from '@tarojs/taro'
 import { useStore } from '../../store'
 import './index.scss'
 
 export default function RecipesPage() {
-  const { dishes, categories, loadFromStorage } = useStore()
+  const { dishes, categories, loadFromStorage, deleteDish } = useStore()
   const [activeCategory, setActiveCategory] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
   
   useEffect(() => {
     loadFromStorage()
@@ -15,7 +17,16 @@ export default function RecipesPage() {
     }
   }, [])
   
-  const filteredDishes = dishes.filter(d => d.categoryId === activeCategory)
+  // 获取所有标签
+  const allTags = Array.from(new Set(dishes.flatMap(d => d.tags)))
+  
+  // 筛选菜品
+  const filteredDishes = dishes.filter(d => {
+    const matchCategory = d.categoryId === activeCategory
+    const matchSearch = d.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchTags = selectedTags.length === 0 || selectedTags.some(tag => d.tags.includes(tag))
+    return matchCategory && matchSearch && matchTags
+  })
   
   const handleDishClick = (dishId: string) => {
     Taro.navigateTo({
@@ -29,36 +40,118 @@ export default function RecipesPage() {
     })
   }
   
+  const handleDeleteDish = (e: any, dishId: string, dishName: string) => {
+    e.stopPropagation()
+    Taro.showModal({
+      title: '确认删除',
+      content: `确定要删除"${dishName}"吗？此操作不可恢复。`,
+      success: (res) => {
+        if (res.confirm) {
+          deleteDish(dishId)
+          Taro.showToast({
+            title: '已删除',
+            icon: 'success'
+          })
+        }
+      }
+    })
+  }
+  
+  const toggleTag = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag))
+    } else {
+      setSelectedTags([...selectedTags, tag])
+    }
+  }
+  
   return (
     <View className="recipes-page">
       <View className="header">
-        <Text className="title">私房菜谱</Text>
-        <Text className="subtitle">共收录 {dishes.length} 道美味</Text>
+        <View className="header-left">
+          <Text className="title">私房菜谱</Text>
+        </View>
+        <View className="header-right">
+          <Text className="count">{dishes.length}</Text>
+          <Text className="count-label">道美味</Text>
+        </View>
+      </View>
+      
+      <View className="search-bar">
+        <Input
+          className="search-input"
+          placeholder="搜索菜谱..."
+          value={searchQuery}
+          onInput={(e) => setSearchQuery(e.detail.value)}
+        />
       </View>
       
       <View className="categories">
-        {categories.map(cat => (
-          <View
-            key={cat.id}
-            className={`category-item ${activeCategory === cat.id ? 'active' : ''}`}
-            onClick={() => setActiveCategory(cat.id)}
-          >
-            <Text>{cat.icon} {cat.name}</Text>
-          </View>
-        ))}
+        <View className="categories-grid">
+          {categories.slice(0, 8).map(cat => (
+            <View
+              key={cat.id}
+              className={`category-item ${activeCategory === cat.id ? 'active' : ''}`}
+              onClick={() => setActiveCategory(cat.id)}
+            >
+              <Text>{cat.icon} {cat.name}</Text>
+            </View>
+          ))}
+        </View>
       </View>
       
-      <View className="dish-list">
-        {filteredDishes.map(dish => (
-          <View
-            key={dish.id}
-            className="dish-card"
-            onClick={() => handleDishClick(dish.id)}
-          >
-            <Text className="dish-name">{dish.name}</Text>
-            <Text className="dish-time">{dish.time}分钟</Text>
+      {allTags.length > 0 && (
+        <View className="tags-section">
+          <Text className="tags-title">标签筛选：</Text>
+          <View className="tags-list">
+            {allTags.slice(0, 8).map(tag => (
+              <View
+                key={tag}
+                className={`tag-item ${selectedTags.includes(tag) ? 'active' : ''}`}
+                onClick={() => toggleTag(tag)}
+              >
+                <Text>{tag}</Text>
+              </View>
+            ))}
           </View>
-        ))}
+        </View>
+      )}
+      
+      <View className="dish-list">
+        {filteredDishes.length === 0 ? (
+          <View className="empty-state">
+            <Text className="empty-text">暂无菜谱</Text>
+          </View>
+        ) : (
+          filteredDishes.map(dish => (
+            <View
+              key={dish.id}
+              className="dish-card"
+              onClick={() => handleDishClick(dish.id)}
+            >
+              <Image className="dish-cover" src={dish.cover} mode="aspectFill" />
+              <View className="dish-info">
+                <Text className="dish-name">{dish.name}</Text>
+                <View className="dish-meta">
+                  <Text className="dish-time">⏱ {dish.time}分钟</Text>
+                  {dish.tags.length > 0 && (
+                    <View className="dish-tags">
+                      {dish.tags.slice(0, 2).map(tag => (
+                        <Text key={tag} className="dish-tag">{tag}</Text>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              </View>
+              <View 
+                className="delete-btn" 
+                onClick={(e) => handleDeleteDish(e, dish.id, dish.name)}
+              >
+                <Text className="delete-icon">×</Text>
+              </View>
+            </View>
+          ))
+        )}
       </View>
       
       <View className="fab" onClick={handleCreateRecipe}>

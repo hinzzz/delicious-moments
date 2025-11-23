@@ -7,42 +7,127 @@
   padding-bottom: 200rpx;
   
   .header {
+    @include card;
+    margin: $spacing-lg;
     padding: $spacing-lg;
+    background: linear-gradient(135deg, #FFD93D, #FFC93D);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     
-    .title {
-      display: block;
-      font-size: 40rpx;
-      font-weight: 900;
-      color: $text-main;
+    .header-left {
+      .title {
+        display: block;
+        font-size: 40rpx;
+        font-weight: 900;
+        color: $text-main;
+      }
     }
     
-    .subtitle {
-      display: block;
-      font-size: 24rpx;
-      color: $text-light;
-      margin-top: $spacing-xs;
+    .header-right {
+      text-align: center;
+      padding: $spacing-sm $spacing-md;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: $radius-md;
+      min-width: 120rpx;
+      
+      .count {
+        display: block;
+        font-size: 36rpx;
+        font-weight: 900;
+        color: $text-main;
+        line-height: 1.2;
+      }
+      
+      .count-label {
+        display: block;
+        font-size: 20rpx;
+        color: $text-sub;
+        margin-top: 4rpx;
+      }
+    }
+  }
+  
+  .search-bar {
+    padding: 0 $spacing-lg $spacing-md;
+    
+    .search-input {
+      @include card;
+      padding: $spacing-md $spacing-lg;
+      font-size: 28rpx;
+      background: white;
     }
   }
   
   .categories {
-    display: flex;
     padding: 0 $spacing-lg;
-    gap: $spacing-sm;
-    overflow-x: auto;
+    margin-bottom: $spacing-md;
+    overflow: hidden;
+    
+    scroll-view {
+      width: 100%;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-sm;
+      
+      .category-item {
+        padding: $spacing-sm $spacing-xs;
+        background: white;
+        border-radius: $radius-md;
+        text-align: center;
+        font-size: 24rpx;
+        font-weight: bold;
+        color: $text-sub;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+        &.active {
+          background: $primary;
+          color: white;
+        }
+      }
+    }
+  }
+  
+  .tags-section {
+    padding: 0 $spacing-lg;
     margin-bottom: $spacing-lg;
     
-    .category-item {
-      padding: $spacing-sm $spacing-lg;
-      background: white;
-      border-radius: $radius-md;
-      white-space: nowrap;
+    .tags-title {
+      display: block;
       font-size: 24rpx;
-      font-weight: bold;
       color: $text-sub;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .tags-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-sm;
+      max-height: 160rpx;
+      overflow: hidden;
       
-      &.active {
-        background: $primary;
-        color: white;
+      .tag-item {
+        padding: 8rpx $spacing-xs;
+        background: white;
+        border-radius: $radius-lg;
+        font-size: 22rpx;
+        color: $text-sub;
+        border: 2rpx solid transparent;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+        &.active {
+          background: rgba(255, 171, 115, 0.1);
+          color: $primary;
+          border-color: $primary;
+        }
       }
     }
   }
@@ -50,22 +135,94 @@
   .dish-list {
     padding: 0 $spacing-lg;
     
+    .empty-state {
+      @include card;
+      padding: 80rpx $spacing-lg;
+      text-align: center;
+      
+      .empty-text {
+        font-size: 28rpx;
+        color: $text-light;
+      }
+    }
+    
     .dish-card {
       @include card;
-      padding: $spacing-lg;
+      padding: $spacing-md;
       margin-bottom: $spacing-sm;
+      display: flex;
+      align-items: center;
+      position: relative;
       
-      .dish-name {
-        display: block;
-        font-size: 28rpx;
-        font-weight: bold;
-        color: $text-main;
-        margin-bottom: $spacing-xs;
+      .dish-cover {
+        width: 120rpx;
+        height: 120rpx;
+        border-radius: $radius-md;
+        background: $bg;
+        flex-shrink: 0;
+        margin-right: $spacing-md;
       }
       
-      .dish-time {
-        font-size: 24rpx;
-        color: $text-light;
+      .dish-info {
+        flex: 1;
+        min-width: 0;
+        
+        .dish-name {
+          display: block;
+          font-size: 28rpx;
+          font-weight: bold;
+          color: $text-main;
+          margin-bottom: $spacing-sm;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        
+        .dish-meta {
+          display: flex;
+          align-items: center;
+          gap: $spacing-md;
+          
+          .dish-time {
+            font-size: 24rpx;
+            color: $text-light;
+          }
+          
+          .dish-tags {
+            display: flex;
+            gap: $spacing-xs;
+            
+            .dish-tag {
+              padding: 4rpx $spacing-sm;
+              background: rgba(255, 171, 115, 0.1);
+              border-radius: $radius-sm;
+              font-size: 20rpx;
+              color: $primary;
+            }
+          }
+        }
+      }
+      
+      .delete-btn {
+        width: 56rpx;
+        height: 56rpx;
+        border-radius: 50%;
+        background: rgba(255, 59, 48, 0.1);
+        @include flex-center;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+        
+        &:active {
+          background: rgba(255, 59, 48, 0.2);
+        }
+        
+        .delete-icon {
+          font-size: 44rpx;
+          color: #FF3B30;
+          font-weight: 300;
+          line-height: 1;
+        }
       }
     }
   }
