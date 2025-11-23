@@ -35,12 +35,15 @@ export default function MenuSelectPage() {
   const totalCount = Object.values(selectedCounts).reduce((a, b) => a + b, 0)
   
   const handleSubmit = () => {
+    const timestamp = Date.now()
+    let counter = 0
+    
     Object.entries(selectedCounts).forEach(([dishId, count]) => {
       const dish = dishes.find(d => d.id === dishId)
       if (dish) {
         for (let i = 0; i < count; i++) {
           addMenuItem({
-            id: `menu-${Date.now()}-${i}`,
+            id: `menu-${timestamp}-${counter++}`,
             dish,
             selectorId: selectedUserId,
             mealTime,
@@ -51,7 +54,7 @@ export default function MenuSelectPage() {
     })
     
     Taro.showToast({
-      title: `已添加 ${totalCount} 道菜`,
+      title: `已添加 ${totalCount} 道菜到${mealTime === 'breakfast' ? '早餐' : mealTime === 'lunch' ? '午餐' : '晚餐'}`,
       icon: 'success'
     })
     

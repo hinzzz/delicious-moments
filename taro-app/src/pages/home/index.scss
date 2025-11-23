@@ -38,7 +38,10 @@
       padding: $spacing-md;
       background: white;
       border-radius: $radius-md;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-xs;
       
       &.active {
         background: $primary;
@@ -46,6 +49,11 @@
         .meal-label {
           color: white;
         }
+      }
+      
+      .meal-icon {
+        width: 40rpx;
+        height: 40rpx;
       }
       
       .meal-label {
@@ -72,14 +80,10 @@
         margin-bottom: $spacing-sm;
       }
       
-      .empty-action {
-        display: inline-block;
+      .empty-hint {
+        display: block;
         font-size: 24rpx;
-        font-weight: bold;
-        color: $primary;
-        background: white;
-        padding: $spacing-sm $spacing-lg;
-        border-radius: $radius-xl;
+        color: $text-light;
       }
     }
     
@@ -89,6 +93,7 @@
       margin-bottom: $spacing-sm;
       display: flex;
       align-items: center;
+      position: relative;
       
       .dish-image {
         width: 100rpx;
@@ -128,6 +133,7 @@
         background: $bg;
         border-radius: $radius-lg;
         flex-shrink: 0;
+        margin-right: $spacing-sm;
         
         .user-avatar {
           width: 40rpx;
@@ -141,40 +147,42 @@
           color: $text-sub;
         }
       }
-    }
-    
-    .add-more {
-      padding: $spacing-lg;
-      text-align: center;
-      border: 2px dashed $text-light;
-      border-radius: $radius-md;
-      margin-top: $spacing-sm;
       
-      text {
-        font-size: 24rpx;
-        font-weight: bold;
-        color: $primary;
+      .delete-btn {
+        width: 48rpx;
+        height: 48rpx;
+        border-radius: 50%;
+        background: rgba(255, 59, 48, 0.1);
+        @include flex-center;
+        flex-shrink: 0;
+        
+        .delete-icon {
+          font-size: 40rpx;
+          color: #FF3B30;
+          font-weight: 300;
+          line-height: 1;
+        }
       }
     }
   }
   
-  .bottom-action {
+  .floating-add-btn {
     position: fixed;
-    bottom: 120rpx;
-    left: 0;
-    right: 0;
-    padding: 0 $spacing-lg;
+    right: $spacing-lg;
+    bottom: 200rpx;
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    background: $primary;
+    box-shadow: $shadow-float;
+    @include flex-center;
+    z-index: 20;
     
-    .generate-btn {
-      @include button-primary;
-      text-align: center;
-      box-shadow: $shadow-float;
-      
-      text {
-        color: white;
-        font-size: 28rpx;
-        font-weight: bold;
-      }
+    .add-icon {
+      font-size: 64rpx;
+      color: white;
+      font-weight: 300;
+      line-height: 1;
     }
   }
 }
