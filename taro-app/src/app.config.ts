@@ -37,9 +37,9 @@ export default defineAppConfig({
       },
       {
         pagePath: 'pages/summary/index',
-        text: '回忆录',
-        iconPath: 'assets/icons/chart.png',
-        selectedIconPath: 'assets/icons/chart-active.png'
+        text: '翻寻味',
+        iconPath: 'assets/icons/翻寻味.png',
+        selectedIconPath: 'assets/icons/翻寻味.png'
       },
       {
         pagePath: 'pages/profile/index',

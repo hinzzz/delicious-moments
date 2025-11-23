@@ -7,27 +7,61 @@
   padding-bottom: 150rpx;
   
   .header {
-    padding: $spacing-xl $spacing-lg;
-    background: white;
+    @include card;
+    margin: $spacing-lg;
+    padding: $spacing-lg;
+    background: linear-gradient(135deg, #A8E6CF, #7FD8BE);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     
-    .title {
-      display: block;
-      font-size: 40rpx;
-      font-weight: 900;
-      color: $text-main;
+    .header-left {
+      .title {
+        display: block;
+        font-size: 40rpx;
+        font-weight: 900;
+        color: white;
+      }
     }
     
-    .subtitle {
-      display: block;
-      font-size: 24rpx;
-      color: $text-light;
-      margin-top: $spacing-xs;
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      background: rgba(255, 255, 255, 0.3);
+      padding: $spacing-sm $spacing-md;
+      border-radius: $radius-md;
+      
+      .stat-item {
+        text-align: center;
+        
+        .stat-number {
+          display: block;
+          font-size: 32rpx;
+          font-weight: 900;
+          color: white;
+          line-height: 1.2;
+        }
+        
+        .stat-label {
+          display: block;
+          font-size: 20rpx;
+          color: rgba(255, 255, 255, 0.9);
+          margin-top: 4rpx;
+        }
+      }
+      
+      .divider {
+        width: 2rpx;
+        height: 48rpx;
+        background: rgba(255, 255, 255, 0.5);
+      }
     }
   }
   
   .range-switcher {
     margin: $spacing-lg;
-    background: white;
+    background: rgba(168, 230, 207, 0.15);
     padding: 8rpx;
     border-radius: $radius-xl;
     display: flex;
@@ -44,7 +78,7 @@
       transition: all 0.3s;
       
       &.active {
-        background: $primary;
+        background: linear-gradient(135deg, #A8E6CF, #7FD8BE);
         color: white;
         box-shadow: $shadow-md;
       }
@@ -60,10 +94,16 @@
       gap: $spacing-md;
       margin-bottom: $spacing-lg;
       
+      .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-md;
+      }
+      
       .stat-card {
         background: white;
         border-radius: $radius-xl;
-        padding: $spacing-lg;
+        padding: $spacing-md;
         box-shadow: $shadow-card;
         position: relative;
         overflow: hidden;
@@ -71,52 +111,10 @@
         &.main-stat {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          min-height: 320rpx;
-          
-          .stat-icon {
-            position: absolute;
-            top: -20rpx;
-            right: -20rpx;
-            font-size: 160rpx;
-            opacity: 0.05;
-          }
-          
-          .stat-content {
-            position: relative;
-            z-index: 1;
-            
-            .stat-label {
-              font-size: 20rpx;
-              font-weight: bold;
-              color: $text-light;
-              margin-bottom: $spacing-xs;
-            }
-            
-            .stat-value-row {
-              display: flex;
-              align-items: baseline;
-              
-              .stat-number {
-                font-size: 60rpx;
-                font-weight: 900;
-                color: $text-main;
-                line-height: 1;
-              }
-              
-              .stat-unit {
-                font-size: 24rpx;
-                font-weight: bold;
-                color: $text-sub;
-                margin-left: $spacing-xs;
-              }
-            }
-          }
+          justify-content: center;
+          min-height: 100rpx;
           
           .favorite-section {
-            position: relative;
-            z-index: 1;
-            margin-top: $spacing-md;
             
             .favorite-label {
               font-size: 20rpx;
@@ -151,11 +149,56 @@
           }
         }
         
+        &.chef-stat {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          min-height: 100rpx;
+          background: linear-gradient(135deg, #FFF0E6 0%, white 100%);
+          border: 2rpx solid #FFE0B2;
+          
+          .chef-badge {
+            background: #FFC107;
+            color: white;
+            font-size: 18rpx;
+            font-weight: bold;
+            padding: 4rpx 12rpx;
+            border-radius: 20rpx;
+            border: 2rpx solid white;
+            box-shadow: $shadow-sm;
+          }
+          
+          .chef-content {
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+            flex: 1;
+            
+            .chef-avatar-medium {
+              width: 56rpx;
+              height: 56rpx;
+              border-radius: 50%;
+              border: 3rpx solid white;
+              box-shadow: $shadow-md;
+            }
+            
+            .chef-name {
+              font-size: 22rpx;
+              font-weight: bold;
+              color: $text-main;
+            }
+          }
+          
+          .medal-icon {
+            font-size: 32rpx;
+          }
+        }
+        
         &.taste-card {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          min-height: 320rpx;
+          min-height: 224rpx;
           
           .card-header {
             display: flex;

@@ -1,3 +1,3 @@
 export default definePageConfig({
-  navigationBarTitleText: '回忆录'
+  navigationBarTitleText: '翻寻味'
 })

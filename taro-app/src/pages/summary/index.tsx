@@ -52,8 +52,20 @@ export default function SummaryPage() {
   return (
     <View className="summary-page">
       <View className="header">
-        <Text className="title">饮食回忆</Text>
-        <Text className="subtitle">记录每一顿温馨</Text>
+        <View className="header-left">
+          <Text className="title">翻寻味</Text>
+        </View>
+        <View className="header-right">
+          <View className="stat-item">
+            <Text className="stat-number">{stats.count}</Text>
+            <Text className="stat-label">顿饭</Text>
+          </View>
+          <View className="divider" />
+          <View className="stat-item">
+            <Text className="stat-number">{dishes.length}</Text>
+            <Text className="stat-label">道菜</Text>
+          </View>
+        </View>
       </View>
       
       {/* 时间范围切换 */}
@@ -72,22 +84,26 @@ export default function SummaryPage() {
       <View className="content">
         {/* 统计卡片行 */}
         <View className="stats-row">
-          {/* 统计卡片 */}
-          <View className="stat-card main-stat">
-            <View className="stat-icon">📈</View>
-            <View className="stat-content">
-              <Text className="stat-label">{ranges.find(r => r.id === range)?.label}共烹饪</Text>
-              <View className="stat-value-row">
-                <Text className="stat-number">{stats.count}</Text>
-                <Text className="stat-unit">顿</Text>
+          <View className="left-column">
+            {/* 最爱吃卡片 */}
+            <View className="stat-card main-stat">
+              <View className="favorite-section">
+                <Text className="favorite-label">最爱吃</Text>
+                <View className="favorite-dish">
+                  <Text className="dish-icon">👨‍🍳</Text>
+                  <Text className="dish-name">{stats.topDish}</Text>
+                </View>
               </View>
             </View>
-            <View className="favorite-section">
-              <Text className="favorite-label">最爱吃</Text>
-              <View className="favorite-dish">
-                <Text className="dish-icon">👨‍🍳</Text>
-                <Text className="dish-name">{stats.topDish}</Text>
+            
+            {/* 本周厨神卡片 */}
+            <View className="stat-card chef-stat">
+              <View className="chef-badge">本周厨神</View>
+              <View className="chef-content">
+                <Image className="chef-avatar-medium" src={stats.topChef.avatar} mode="aspectFill" />
+                <Text className="chef-name">{stats.topChef.name}</Text>
               </View>
+              <Text className="medal-icon">🏅</Text>
             </View>
           </View>
           
@@ -143,17 +159,6 @@ export default function SummaryPage() {
               </View>
             ))}
           </View>
-        </View>
-        
-        {/* 本周厨神 */}
-        <View className="chef-card">
-          <View className="chef-badge">本周厨神</View>
-          <Image className="chef-avatar-large" src={stats.topChef.avatar} mode="aspectFill" />
-          <View className="chef-info">
-            <Text className="chef-name">{stats.topChef.name}</Text>
-            <Text className="chef-desc">为大家准备了 {Math.floor(stats.count * 0.6)} 道菜</Text>
-          </View>
-          <Text className="medal-icon">🏅</Text>
         </View>
       </View>
     </View>
