@@ -1,0 +1,312 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.menu-select-page {
+  min-height: 100vh;
+  background: $bg;
+  padding-bottom: 150rpx;
+  
+  .user-selector {
+    padding: $spacing-lg;
+    background: white;
+    margin-bottom: $spacing-md;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    
+    .label {
+      font-size: 28rpx;
+      color: $text-main;
+      font-weight: bold;
+    }
+    
+    .user-option {
+      padding: $spacing-sm $spacing-lg;
+      background: $bg;
+      border-radius: $radius-md;
+      font-size: 24rpx;
+      color: $text-sub;
+      
+      &.active {
+        background: $primary;
+        color: white;
+      }
+    }
+  }
+  
+  .search-bar {
+    padding: 0 $spacing-lg $spacing-md;
+    background: white;
+    
+    .search-input {
+      background: $bg;
+      padding: $spacing-md;
+      border-radius: $radius-md;
+      font-size: 28rpx;
+    }
+  }
+  
+  .categories {
+    display: flex;
+    padding: 0 $spacing-lg $spacing-md;
+    gap: $spacing-sm;
+    overflow-x: auto;
+    background: white;
+    
+    .category-item {
+      padding: $spacing-sm $spacing-lg;
+      background: $bg;
+      border-radius: $radius-md;
+      white-space: nowrap;
+      font-size: 24rpx;
+      font-weight: bold;
+      color: $text-sub;
+      
+      &.active {
+        background: $primary;
+        color: white;
+      }
+    }
+  }
+  
+  .dish-list {
+    padding: 0 $spacing-lg;
+    
+    .dish-card {
+      @include card;
+      display: flex;
+      align-items: center;
+      padding: $spacing-md;
+      margin-bottom: $spacing-sm;
+      
+      .dish-image {
+        width: 120rpx;
+        height: 120rpx;
+        border-radius: $radius-md;
+        background: $bg;
+        flex-shrink: 0;
+        margin-right: $spacing-md;
+      }
+      
+      .dish-info {
+        flex: 1;
+        min-width: 0;
+        
+        .dish-name {
+          display: block;
+          font-size: 28rpx;
+          font-weight: bold;
+          color: $text-main;
+          margin-bottom: $spacing-xs;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        
+        .dish-time {
+          font-size: 24rpx;
+          color: $text-light;
+        }
+      }
+      
+      .dish-actions {
+        .add-btn {
+          width: 60rpx;
+          height: 60rpx;
+          background: $primary;
+          border-radius: 50%;
+          @include flex-center;
+          color: white;
+          font-size: 32rpx;
+          font-weight: bold;
+        }
+        
+        .stepper {
+          display: flex;
+          align-items: center;
+          background: $bg;
+          border-radius: $radius-xl;
+          padding: 4rpx;
+          
+          .stepper-btn {
+            width: 48rpx;
+            height: 48rpx;
+            background: white;
+            border-radius: 50%;
+            @include flex-center;
+            font-size: 32rpx;
+            font-weight: bold;
+            color: $text-main;
+            box-shadow: $shadow-card;
+          }
+          
+          .stepper-count {
+            width: 48rpx;
+            text-align: center;
+            font-size: 28rpx;
+            font-weight: bold;
+            color: $text-main;
+          }
+        }
+      }
+    }
+  }
+  
+  .cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8rpx);
+    -webkit-backdrop-filter: blur(8rpx);
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 $spacing-lg;
+    
+    .cart-popup {
+      background: white;
+      border-radius: $radius-lg;
+      padding: $spacing-lg;
+      max-height: 60vh;
+      width: 100%;
+      max-width: 680rpx;
+      margin-bottom: 180rpx;
+      box-shadow: 0 -8rpx 40rpx rgba(0, 0, 0, 0.2);
+      
+      .cart-header {
+        @include flex-between;
+        margin-bottom: $spacing-md;
+        padding-bottom: $spacing-sm;
+        border-bottom: 2rpx solid $bg;
+        
+        .cart-title {
+          font-size: 28rpx;
+          font-weight: bold;
+          color: $text-main;
+        }
+        
+        .clear-btn {
+          font-size: 24rpx;
+          color: $text-light;
+          padding: $spacing-xs $spacing-sm;
+          background: $bg;
+          border-radius: $radius-sm;
+        }
+      }
+      
+      .cart-list {
+        max-height: 50vh;
+        overflow-y: auto;
+        
+        .cart-item {
+          display: flex;
+          align-items: center;
+          padding: $spacing-md 0;
+          border-bottom: 1rpx solid $bg;
+          
+          .cart-dish-image {
+            width: 80rpx;
+            height: 80rpx;
+            border-radius: $radius-sm;
+            background: $bg;
+            flex-shrink: 0;
+            margin-right: $spacing-md;
+          }
+          
+          .cart-dish-name {
+            flex: 1;
+            font-size: 28rpx;
+            color: $text-main;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          
+          .cart-stepper {
+            display: flex;
+            align-items: center;
+            background: $bg;
+            border-radius: $radius-xl;
+            padding: 4rpx;
+            
+            .stepper-btn {
+              width: 48rpx;
+              height: 48rpx;
+              background: white;
+              border-radius: 50%;
+              @include flex-center;
+              font-size: 32rpx;
+              font-weight: bold;
+              color: $text-main;
+              box-shadow: $shadow-card;
+            }
+            
+            .stepper-count {
+              width: 48rpx;
+              text-align: center;
+              font-size: 28rpx;
+              font-weight: bold;
+              color: $text-main;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $text-main;
+    padding: $spacing-lg;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+    
+    .selected-info {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      color: white;
+      font-size: 28rpx;
+      font-weight: bold;
+      
+      .cart-icon {
+        position: relative;
+        width: 60rpx;
+        height: 60rpx;
+        background: $primary;
+        border-radius: 50%;
+        @include flex-center;
+        
+        .cart-count {
+          font-size: 24rpx;
+          font-weight: bold;
+          color: white;
+        }
+      }
+      
+      .arrow {
+        font-size: 20rpx;
+        margin-left: $spacing-xs;
+      }
+    }
+    
+    .submit-btn {
+      background: $primary;
+      color: white;
+      padding: $spacing-md $spacing-xl;
+      border-radius: $radius-xl;
+      font-size: 28rpx;
+      font-weight: bold;
+    }
+  }
+}

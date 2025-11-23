@@ -1,0 +1,47 @@
+@import '../../styles/variables.scss';
+
+.dish-detail-page {
+  min-height: 100vh;
+  background: $bg;
+  
+  .header {
+    padding: $spacing-lg;
+    background: white;
+    margin-bottom: $spacing-md;
+    
+    .title {
+      display: block;
+      font-size: 40rpx;
+      font-weight: 900;
+      color: $text-main;
+      margin-bottom: $spacing-xs;
+    }
+    
+    .time {
+      font-size: 24rpx;
+      color: $text-light;
+    }
+  }
+  
+  .section {
+    padding: $spacing-lg;
+    background: white;
+    margin-bottom: $spacing-md;
+    
+    .section-title {
+      display: block;
+      font-size: 28rpx;
+      font-weight: bold;
+      color: $text-main;
+      margin-bottom: $spacing-md;
+    }
+    
+    .ingredient-item {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-sm 0;
+      font-size: 24rpx;
+      color: $text-sub;
+    }
+  }
+}

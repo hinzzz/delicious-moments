@@ -1,0 +1,71 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.shopping-list-page {
+  min-height: 100vh;
+  background: $bg;
+  padding-bottom: 100rpx;
+  
+  .header {
+    padding: $spacing-lg;
+    
+    .title {
+      display: block;
+      font-size: 40rpx;
+      font-weight: 900;
+      color: $text-main;
+    }
+    
+    .subtitle {
+      display: block;
+      font-size: 24rpx;
+      color: $text-light;
+      margin-top: $spacing-xs;
+    }
+  }
+  
+  .category-section {
+    padding: 0 $spacing-lg;
+    margin-bottom: $spacing-lg;
+    
+    .category-title {
+      display: block;
+      font-size: 24rpx;
+      font-weight: bold;
+      color: $text-sub;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .ingredient-item {
+      @include card;
+      @include flex-between;
+      padding: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      
+      &.checked {
+        opacity: 0.5;
+        text-decoration: line-through;
+      }
+      
+      .ingredient-name {
+        font-size: 28rpx;
+        color: $text-main;
+      }
+      
+      .ingredient-quantity {
+        font-size: 24rpx;
+        color: $text-light;
+      }
+    }
+  }
+  
+  .empty {
+    padding: 100rpx $spacing-lg;
+    text-align: center;
+    
+    text {
+      font-size: 28rpx;
+      color: $text-light;
+    }
+  }
+}

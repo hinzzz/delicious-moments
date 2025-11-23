@@ -1,0 +1,90 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.recipes-page {
+  min-height: 100vh;
+  background: $bg;
+  padding-bottom: 200rpx;
+  
+  .header {
+    padding: $spacing-lg;
+    
+    .title {
+      display: block;
+      font-size: 40rpx;
+      font-weight: 900;
+      color: $text-main;
+    }
+    
+    .subtitle {
+      display: block;
+      font-size: 24rpx;
+      color: $text-light;
+      margin-top: $spacing-xs;
+    }
+  }
+  
+  .categories {
+    display: flex;
+    padding: 0 $spacing-lg;
+    gap: $spacing-sm;
+    overflow-x: auto;
+    margin-bottom: $spacing-lg;
+    
+    .category-item {
+      padding: $spacing-sm $spacing-lg;
+      background: white;
+      border-radius: $radius-md;
+      white-space: nowrap;
+      font-size: 24rpx;
+      font-weight: bold;
+      color: $text-sub;
+      
+      &.active {
+        background: $primary;
+        color: white;
+      }
+    }
+  }
+  
+  .dish-list {
+    padding: 0 $spacing-lg;
+    
+    .dish-card {
+      @include card;
+      padding: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      
+      .dish-name {
+        display: block;
+        font-size: 28rpx;
+        font-weight: bold;
+        color: $text-main;
+        margin-bottom: $spacing-xs;
+      }
+      
+      .dish-time {
+        font-size: 24rpx;
+        color: $text-light;
+      }
+    }
+  }
+  
+  .fab {
+    position: fixed;
+    bottom: 150rpx;
+    right: $spacing-lg;
+    width: 100rpx;
+    height: 100rpx;
+    background: $primary;
+    border-radius: 50%;
+    @include flex-center;
+    box-shadow: $shadow-float;
+    
+    text {
+      font-size: 48rpx;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}

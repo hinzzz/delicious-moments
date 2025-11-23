@@ -1,0 +1,158 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.home-page {
+  min-height: 100vh;
+  background: $bg;
+  padding-bottom: 200rpx;
+  
+  .banner {
+    @include card;
+    margin: $spacing-lg;
+    padding: $spacing-lg;
+    background: linear-gradient(135deg, #FFAB73, #FF9A62);
+    
+    .date {
+      display: block;
+      font-size: 20rpx;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: $spacing-xs;
+    }
+    
+    .title {
+      display: block;
+      font-size: 40rpx;
+      font-weight: 900;
+      color: white;
+    }
+  }
+  
+  .meal-tabs {
+    display: flex;
+    padding: 0 $spacing-lg;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    
+    .meal-tab {
+      flex: 1;
+      padding: $spacing-md;
+      background: white;
+      border-radius: $radius-md;
+      text-align: center;
+      
+      &.active {
+        background: $primary;
+        
+        .meal-label {
+          color: white;
+        }
+      }
+      
+      .meal-label {
+        font-size: 24rpx;
+        font-weight: bold;
+        color: $text-sub;
+      }
+    }
+  }
+  
+  .dish-list {
+    padding: 0 $spacing-lg;
+    
+    .empty-state {
+      @include card;
+      padding: 80rpx $spacing-lg;
+      text-align: center;
+      border: 2px dashed rgba(255, 171, 115, 0.3);
+      
+      .empty-text {
+        display: block;
+        font-size: 28rpx;
+        color: $text-main;
+        margin-bottom: $spacing-sm;
+      }
+      
+      .empty-action {
+        display: inline-block;
+        font-size: 24rpx;
+        font-weight: bold;
+        color: $primary;
+        background: white;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $radius-xl;
+      }
+    }
+    
+    .dish-item {
+      @include card;
+      padding: $spacing-md;
+      margin-bottom: $spacing-sm;
+      display: flex;
+      align-items: center;
+      
+      .dish-image {
+        width: 100rpx;
+        height: 100rpx;
+        border-radius: $radius-md;
+        background: $bg;
+        flex-shrink: 0;
+        margin-right: $spacing-md;
+      }
+      
+      .dish-info {
+        flex: 1;
+        min-width: 0;
+        
+        .dish-name {
+          display: block;
+          font-size: 28rpx;
+          font-weight: bold;
+          color: $text-main;
+          margin-bottom: $spacing-xs;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        
+        .dish-time {
+          font-size: 24rpx;
+          color: $text-light;
+        }
+      }
+    }
+    
+    .add-more {
+      padding: $spacing-lg;
+      text-align: center;
+      border: 2px dashed $text-light;
+      border-radius: $radius-md;
+      margin-top: $spacing-sm;
+      
+      text {
+        font-size: 24rpx;
+        font-weight: bold;
+        color: $primary;
+      }
+    }
+  }
+  
+  .bottom-action {
+    position: fixed;
+    bottom: 120rpx;
+    left: 0;
+    right: 0;
+    padding: 0 $spacing-lg;
+    
+    .generate-btn {
+      @include button-primary;
+      text-align: center;
+      box-shadow: $shadow-float;
+      
+      text {
+        color: white;
+        font-size: 28rpx;
+        font-weight: bold;
+      }
+    }
+  }
+}

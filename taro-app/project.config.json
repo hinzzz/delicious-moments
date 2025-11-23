@@ -1,0 +1,15 @@
+{
+  "miniprogramRoot": "dist",
+  "projectname": "taro-delicious-moments",
+  "description": "Family meal planning app",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "enhance": true,
+    "compileHotReLoad": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}

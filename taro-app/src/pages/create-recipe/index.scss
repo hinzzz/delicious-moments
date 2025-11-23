@@ -1,0 +1,149 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.create-recipe-page {
+  min-height: 100vh;
+  background: $bg;
+  padding-bottom: 150rpx;
+  
+  .form-section {
+    padding: $spacing-lg;
+    
+    .form-item {
+      background: white;
+      padding: $spacing-lg;
+      border-radius: $radius-lg;
+      margin-bottom: $spacing-md;
+      
+      .label {
+        display: block;
+        font-size: 24rpx;
+        font-weight: bold;
+        color: $text-sub;
+        margin-bottom: $spacing-sm;
+      }
+      
+      .label-row {
+        @include flex-between;
+        margin-bottom: $spacing-sm;
+        
+        .add-ingredient-btn {
+          font-size: 24rpx;
+          color: $primary;
+          font-weight: bold;
+        }
+      }
+      
+      .input {
+        background: $bg;
+        padding: $spacing-md;
+        border-radius: $radius-md;
+        font-size: 28rpx;
+        width: 100%;
+      }
+      
+      .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        
+        .category-tag {
+          padding: $spacing-sm $spacing-lg;
+          background: $bg;
+          border-radius: $radius-md;
+          font-size: 24rpx;
+          font-weight: bold;
+          color: $text-sub;
+          
+          &.active {
+            background: $secondary;
+            color: white;
+          }
+        }
+      }
+      
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        
+        .tag-item {
+          padding: $spacing-sm $spacing-lg;
+          background: $bg;
+          border-radius: $radius-md;
+          font-size: 24rpx;
+          color: $text-sub;
+          
+          &.active {
+            background: $primary;
+            color: white;
+          }
+        }
+      }
+      
+      .ingredient-list {
+        .ingredient-item {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          margin-bottom: $spacing-sm;
+          
+          .ing-name {
+            flex: 2;
+            background: $bg;
+            padding: $spacing-sm;
+            border-radius: $radius-sm;
+            font-size: 24rpx;
+          }
+          
+          .ing-quantity {
+            flex: 1;
+            background: $bg;
+            padding: $spacing-sm;
+            border-radius: $radius-sm;
+            font-size: 24rpx;
+            text-align: center;
+          }
+          
+          .ing-unit {
+            flex: 1;
+            background: $bg;
+            padding: $spacing-sm;
+            border-radius: $radius-sm;
+            font-size: 24rpx;
+            text-align: center;
+          }
+          
+          .remove-btn {
+            width: 48rpx;
+            height: 48rpx;
+            @include flex-center;
+            color: $text-light;
+            font-size: 40rpx;
+          }
+        }
+      }
+    }
+  }
+  
+  .bottom-action {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: $spacing-lg;
+    background: white;
+    box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
+    
+    .save-btn {
+      background: $primary;
+      color: white;
+      text-align: center;
+      padding: $spacing-lg;
+      border-radius: $radius-xl;
+      font-weight: bold;
+      font-size: 28rpx;
+      box-shadow: $shadow-float;
+    }
+  }
+}

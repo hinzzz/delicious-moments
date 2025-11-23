@@ -1,0 +1,43 @@
+@import './variables.scss';
+
+// Card mixin
+@mixin card {
+  background: $card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+// Button primary
+@mixin button-primary {
+  background: $primary;
+  color: white;
+  border-radius: $radius-xl;
+  font-weight: bold;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+}
+
+// Button secondary
+@mixin button-secondary {
+  background: white;
+  color: $text-main;
+  border-radius: $radius-xl;
+  font-weight: bold;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+  box-shadow: $shadow-card;
+}
+
+// Flex center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex between
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

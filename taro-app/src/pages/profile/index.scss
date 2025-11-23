@@ -1,0 +1,57 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.profile-page {
+  min-height: 100vh;
+  background: $bg;
+  
+  .header {
+    padding: $spacing-lg;
+    
+    .title {
+      display: block;
+      font-size: 40rpx;
+      font-weight: 900;
+      color: $text-main;
+    }
+  }
+  
+  .user-section {
+    padding: 0 $spacing-lg;
+    margin-bottom: $spacing-lg;
+    
+    .section-title {
+      display: block;
+      font-size: 24rpx;
+      color: $text-sub;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .user-card {
+      @include card;
+      padding: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      
+      .user-name {
+        font-size: 28rpx;
+        font-weight: bold;
+        color: $text-main;
+      }
+    }
+  }
+  
+  .menu-section {
+    padding: 0 $spacing-lg;
+    
+    .menu-item {
+      @include card;
+      padding: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      
+      text {
+        font-size: 28rpx;
+        color: $text-main;
+      }
+    }
+  }
+}
