@@ -119,6 +119,28 @@
           color: $text-light;
         }
       }
+      
+      .user-badge {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        padding: 8rpx 12rpx;
+        background: $bg;
+        border-radius: $radius-lg;
+        flex-shrink: 0;
+        
+        .user-avatar {
+          width: 40rpx;
+          height: 40rpx;
+          border-radius: 50%;
+        }
+        
+        .user-name {
+          font-size: 20rpx;
+          font-weight: bold;
+          color: $text-sub;
+        }
+      }
     }
     
     .add-more {

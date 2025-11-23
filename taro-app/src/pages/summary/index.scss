@@ -4,9 +4,11 @@
 .summary-page {
   min-height: 100vh;
   background: $bg;
+  padding-bottom: 150rpx;
   
   .header {
-    padding: $spacing-lg;
+    padding: $spacing-xl $spacing-lg;
+    background: white;
     
     .title {
       display: block;
@@ -23,40 +25,352 @@
     }
   }
   
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-md;
-    padding: 0 $spacing-lg;
-    margin-bottom: $spacing-lg;
+  .range-switcher {
+    margin: $spacing-lg;
+    background: white;
+    padding: 8rpx;
+    border-radius: $radius-xl;
+    display: flex;
+    box-shadow: $shadow-sm;
     
-    .stat-card {
-      @include card;
-      padding: $spacing-lg;
+    .range-btn {
+      flex: 1;
+      padding: $spacing-md;
+      text-align: center;
+      border-radius: $radius-lg;
+      font-size: 24rpx;
+      font-weight: bold;
+      color: $text-light;
+      transition: all 0.3s;
       
-      .stat-label {
-        display: block;
-        font-size: 20rpx;
-        color: $text-light;
-        margin-bottom: $spacing-xs;
-      }
-      
-      .stat-value {
-        display: block;
-        font-size: 32rpx;
-        font-weight: bold;
-        color: $text-main;
+      &.active {
+        background: $primary;
+        color: white;
+        box-shadow: $shadow-md;
       }
     }
   }
   
   .content {
-    padding: $spacing-lg;
+    padding: 0 $spacing-lg $spacing-lg;
     
-    .section-title {
-      font-size: 24rpx;
-      color: $text-sub;
-      text-align: center;
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+      
+      .stat-card {
+        background: white;
+        border-radius: $radius-xl;
+        padding: $spacing-lg;
+        box-shadow: $shadow-card;
+        position: relative;
+        overflow: hidden;
+        
+        &.main-stat {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 320rpx;
+          
+          .stat-icon {
+            position: absolute;
+            top: -20rpx;
+            right: -20rpx;
+            font-size: 160rpx;
+            opacity: 0.05;
+          }
+          
+          .stat-content {
+            position: relative;
+            z-index: 1;
+            
+            .stat-label {
+              font-size: 20rpx;
+              font-weight: bold;
+              color: $text-light;
+              margin-bottom: $spacing-xs;
+            }
+            
+            .stat-value-row {
+              display: flex;
+              align-items: baseline;
+              
+              .stat-number {
+                font-size: 60rpx;
+                font-weight: 900;
+                color: $text-main;
+                line-height: 1;
+              }
+              
+              .stat-unit {
+                font-size: 24rpx;
+                font-weight: bold;
+                color: $text-sub;
+                margin-left: $spacing-xs;
+              }
+            }
+          }
+          
+          .favorite-section {
+            position: relative;
+            z-index: 1;
+            margin-top: $spacing-md;
+            
+            .favorite-label {
+              font-size: 20rpx;
+              font-weight: bold;
+              color: $text-light;
+              margin-bottom: $spacing-xs;
+            }
+            
+            .favorite-dish {
+              background: #FFF9F5;
+              padding: $spacing-sm $spacing-md;
+              border-radius: $radius-lg;
+              display: flex;
+              align-items: center;
+              border: 2rpx solid #FFE0B2;
+              
+              .dish-icon {
+                font-size: 28rpx;
+                margin-right: $spacing-sm;
+              }
+              
+              .dish-name {
+                font-size: 24rpx;
+                font-weight: bold;
+                color: $text-main;
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+        
+        &.taste-card {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 320rpx;
+          
+          .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: $spacing-lg;
+            
+            .card-icon {
+              font-size: 28rpx;
+              margin-right: $spacing-sm;
+            }
+            
+            .card-title {
+              font-size: 24rpx;
+              font-weight: bold;
+              color: $text-main;
+            }
+          }
+          
+          .taste-bars {
+            .taste-item {
+              margin-bottom: $spacing-lg;
+              
+              &:last-child {
+                margin-bottom: 0;
+              }
+              
+              .taste-label-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: $spacing-xs;
+                
+                .taste-label {
+                  font-size: 20rpx;
+                  font-weight: bold;
+                  color: $text-sub;
+                }
+                
+                .taste-percent {
+                  font-size: 20rpx;
+                  font-weight: bold;
+                  color: $text-sub;
+                }
+              }
+              
+              .progress-bar {
+                height: 12rpx;
+                background: $bg;
+                border-radius: 20rpx;
+                overflow: hidden;
+                
+                .progress-fill {
+                  height: 100%;
+                  border-radius: 20rpx;
+                  
+                  &.vegetable {
+                    background: $secondary;
+                  }
+                  
+                  &.meat {
+                    background: $primary;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .history-card {
+      background: white;
+      border-radius: $radius-xl;
+      padding: $spacing-lg;
+      box-shadow: $shadow-card;
+      margin-bottom: $spacing-lg;
+      
+      .history-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: $spacing-lg;
+        
+        .history-icon {
+          font-size: 32rpx;
+          margin-right: $spacing-sm;
+        }
+        
+        .history-title {
+          font-size: 28rpx;
+          font-weight: bold;
+          color: $text-main;
+        }
+      }
+      
+      .history-list {
+        .history-item {
+          display: flex;
+          align-items: center;
+          padding: $spacing-md 0;
+          border-bottom: 1rpx solid $bg;
+          
+          &:last-child {
+            border-bottom: none;
+          }
+          
+          .dish-cover {
+            width: 96rpx;
+            height: 96rpx;
+            border-radius: $radius-lg;
+            background: $bg;
+            flex-shrink: 0;
+          }
+          
+          .dish-info {
+            flex: 1;
+            margin-left: $spacing-md;
+            overflow: hidden;
+            
+            .dish-name {
+              font-size: 28rpx;
+              font-weight: bold;
+              color: $text-main;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            
+            .dish-meta {
+              display: flex;
+              align-items: center;
+              margin-top: $spacing-xs;
+              
+              .meal-tag {
+                background: $bg;
+                padding: 4rpx 12rpx;
+                border-radius: $radius-sm;
+                margin-right: $spacing-sm;
+                
+                text {
+                  font-size: 20rpx;
+                  color: $text-sub;
+                }
+              }
+              
+              .dish-date {
+                font-size: 20rpx;
+                color: $text-light;
+              }
+            }
+          }
+          
+          .chef-avatar {
+            width: 48rpx;
+            height: 48rpx;
+            border-radius: 50%;
+            border: 2rpx solid white;
+            box-shadow: $shadow-sm;
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+    
+    .chef-card {
+      background: linear-gradient(135deg, #FFF0E6 0%, white 100%);
+      border-radius: $radius-xl;
+      padding: $spacing-lg;
+      display: flex;
+      align-items: center;
+      border: 2rpx solid #FFE0B2;
+      position: relative;
+      
+      .chef-badge {
+        position: absolute;
+        top: -12rpx;
+        right: $spacing-lg;
+        background: #FFC107;
+        color: white;
+        font-size: 20rpx;
+        font-weight: bold;
+        padding: 4rpx 16rpx;
+        border-radius: 20rpx;
+        border: 2rpx solid white;
+        box-shadow: $shadow-sm;
+      }
+      
+      .chef-avatar-large {
+        width: 112rpx;
+        height: 112rpx;
+        border-radius: 50%;
+        border: 4rpx solid white;
+        box-shadow: $shadow-float;
+        flex-shrink: 0;
+      }
+      
+      .chef-info {
+        flex: 1;
+        margin-left: $spacing-lg;
+        
+        .chef-name {
+          font-size: 36rpx;
+          font-weight: bold;
+          color: $text-main;
+        }
+        
+        .chef-desc {
+          font-size: 24rpx;
+          color: $text-sub;
+          margin-top: $spacing-xs;
+        }
+      }
+      
+      .medal-icon {
+        font-size: 56rpx;
+        flex-shrink: 0;
+      }
     }
   }
 }

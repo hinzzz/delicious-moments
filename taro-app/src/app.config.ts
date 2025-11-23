@@ -43,9 +43,9 @@ export default defineAppConfig({
       },
       {
         pagePath: 'pages/profile/index',
-        text: '我的',
-        iconPath: 'assets/icons/user.png',
-        selectedIconPath: 'assets/icons/user-active.png'
+        text: '家庭',
+        iconPath: 'assets/icons/family.png',
+        selectedIconPath: 'assets/icons/family-active.png'
       }
     ]
   }
