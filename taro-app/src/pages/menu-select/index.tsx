@@ -11,14 +11,28 @@ export default function MenuSelectPage() {
   const [selectedUserId, setSelectedUserId] = useState(users[0]?.id || '')
   const [activeCategory, setActiveCategory] = useState(categories[0]?.id || '')
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [selectedCounts, setSelectedCounts] = useState<Record<string, number>>({})
   const [showCart, setShowCart] = useState(false)
   const mealTime = (router.params.mealTime || 'lunch') as MealType
   
-  const filteredDishes = dishes.filter(d => 
-    d.categoryId === activeCategory && 
-    d.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
+  // 获取所有标签
+  const allTags = Array.from(new Set(dishes.flatMap(d => d.tags)))
+  
+  const filteredDishes = dishes.filter(d => {
+    const matchCategory = d.categoryId === activeCategory
+    const matchSearch = d.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchTags = selectedTags.length === 0 || selectedTags.some(tag => d.tags.includes(tag))
+    return matchCategory && matchSearch && matchTags
+  })
+  
+  const toggleTag = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag))
+    } else {
+      setSelectedTags([...selectedTags, tag])
+    }
+  }
   
   const updateCount = (dishId: string, delta: number) => {
     const current = selectedCounts[dishId] || 0
@@ -88,16 +102,35 @@ export default function MenuSelectPage() {
       </View>
       
       <View className="categories">
-        {categories.map(cat => (
-          <View
-            key={cat.id}
-            className={`category-item ${activeCategory === cat.id ? 'active' : ''}`}
-            onClick={() => setActiveCategory(cat.id)}
-          >
-            <Text>{cat.icon} {cat.name}</Text>
-          </View>
-        ))}
+        <View className="categories-grid">
+          {categories.slice(0, 8).map(cat => (
+            <View
+              key={cat.id}
+              className={`category-item ${activeCategory === cat.id ? 'active' : ''}`}
+              onClick={() => setActiveCategory(cat.id)}
+            >
+              <Text>{cat.icon} {cat.name}</Text>
+            </View>
+          ))}
+        </View>
       </View>
+      
+      {allTags.length > 0 && (
+        <View className="tags-section">
+          <Text className="tags-title">标签筛选：</Text>
+          <View className="tags-grid">
+            {allTags.slice(0, 8).map(tag => (
+              <View
+                key={tag}
+                className={`tag-item ${selectedTags.includes(tag) ? 'active' : ''}`}
+                onClick={() => toggleTag(tag)}
+              >
+                <Text>{tag}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      )}
       
       <View className="dish-list">
         {filteredDishes.map(dish => {
