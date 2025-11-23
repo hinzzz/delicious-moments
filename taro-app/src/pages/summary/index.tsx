@@ -132,6 +132,15 @@ export default function SummaryPage() {
                   <View className="progress-fill meat" style="width: 30%" />
                 </View>
               </View>
+              <View className="taste-item">
+                <View className="taste-label-row">
+                  <Text className="taste-label">🦐 海鲜</Text>
+                  <Text className="taste-percent">25%</Text>
+                </View>
+                <View className="progress-bar">
+                  <View className="progress-fill seafood" style="width: 25%" />
+                </View>
+              </View>
             </View>
           </View>
         </View>

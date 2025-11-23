@@ -219,7 +219,7 @@
           
           .taste-bars {
             .taste-item {
-              margin-bottom: $spacing-lg;
+              margin-bottom: $spacing-md;
               
               &:last-child {
                 margin-bottom: 0;
@@ -259,6 +259,10 @@
                   
                   &.meat {
                     background: $primary;
+                  }
+                  
+                  &.seafood {
+                    background: #4FC3F7;
                   }
                 }
               }
