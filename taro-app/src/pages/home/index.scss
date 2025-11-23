@@ -149,15 +149,21 @@
       }
       
       .delete-btn {
-        width: 48rpx;
-        height: 48rpx;
+        width: 56rpx;
+        height: 56rpx;
         border-radius: 50%;
         background: rgba(255, 59, 48, 0.1);
         @include flex-center;
         flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+        
+        &:active {
+          background: rgba(255, 59, 48, 0.2);
+        }
         
         .delete-icon {
-          font-size: 40rpx;
+          font-size: 44rpx;
           color: #FF3B30;
           font-weight: 300;
           line-height: 1;
@@ -169,7 +175,7 @@
   .floating-add-btn {
     position: fixed;
     right: $spacing-lg;
-    bottom: 200rpx;
+    bottom: 280rpx;
     width: 96rpx;
     height: 96rpx;
     border-radius: 50%;
@@ -183,6 +189,29 @@
       color: white;
       font-weight: 300;
       line-height: 1;
+    }
+  }
+  
+  .bottom-action {
+    position: fixed;
+    bottom: 120rpx;
+    left: 0;
+    right: 0;
+    padding: 0 $spacing-lg;
+    background: linear-gradient(to top, $bg 80%, transparent);
+    padding-top: $spacing-lg;
+    z-index: 10;
+    
+    .generate-btn {
+      @include button-primary;
+      text-align: center;
+      box-shadow: $shadow-float;
+      
+      text {
+        color: white;
+        font-size: 28rpx;
+        font-weight: bold;
+      }
     }
   }
 }

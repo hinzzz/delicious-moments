@@ -41,12 +41,15 @@ export default function HomePage() {
     })
   }
   
-  const handleDeleteDish = (id: string, dishName: string) => {
+  const handleDeleteDish = (e: any, id: string, dishName: string) => {
+    e.stopPropagation()
+    console.log('删除菜品:', id, dishName)
     Taro.showModal({
       title: '确认删除',
       content: `确定要删除"${dishName}"吗？`,
       success: (res) => {
         if (res.confirm) {
+          console.log('确认删除，调用 removeMenuItem')
           removeMenuItem(id)
           Taro.showToast({
             title: '已删除',
@@ -111,7 +114,7 @@ export default function HomePage() {
                   )}
                   <View 
                     className="delete-btn" 
-                    onClick={() => handleDeleteDish(item.id, item.dish.name)}
+                    onClick={(e) => handleDeleteDish(e, item.id, item.dish.name)}
                   >
                     <Text className="delete-icon">×</Text>
                   </View>
@@ -124,6 +127,12 @@ export default function HomePage() {
       
       <View className="floating-add-btn" onClick={handleAddDish}>
         <Text className="add-icon">+</Text>
+      </View>
+      
+      <View className="bottom-action">
+        <View className="generate-btn" onClick={handleGenerateList}>
+          <Text>生成买菜清单 ({menuItems.length})</Text>
+        </View>
       </View>
     </View>
   )
