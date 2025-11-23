@@ -10,7 +10,7 @@
     @include card;
     margin: $spacing-lg;
     padding: $spacing-lg;
-    background: linear-gradient(135deg, #FFAB73, #FF9A62);
+    background: linear-gradient(135deg, #FFCC99, #FFB380);
     
     .date {
       display: block;
@@ -44,7 +44,7 @@
       gap: $spacing-xs;
       
       &.active {
-        background: $primary;
+        background: linear-gradient(135deg, #FFE0B2, #FFCC80);
         
         .meal-label {
           color: white;
@@ -179,7 +179,7 @@
     width: 96rpx;
     height: 96rpx;
     border-radius: 50%;
-    background: $primary;
+    background: linear-gradient(135deg, #FFE0B2, #FFCC80);
     box-shadow: $shadow-float;
     @include flex-center;
     z-index: 20;
@@ -203,7 +203,9 @@
     z-index: 10;
     
     .generate-btn {
-      @include button-primary;
+      background: linear-gradient(135deg, #FFE0B2, #FFCC80);
+      padding: $spacing-lg;
+      border-radius: $radius-xl;
       text-align: center;
       box-shadow: $shadow-float;
       

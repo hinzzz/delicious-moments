@@ -10,7 +10,7 @@
     @include card;
     margin: $spacing-lg;
     padding: $spacing-lg;
-    background: linear-gradient(135deg, #A8E6CF, #7FD8BE);
+    background: linear-gradient(135deg, #B2EBD4, #80CBC4);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -78,7 +78,7 @@
       transition: all 0.3s;
       
       &.active {
-        background: linear-gradient(135deg, #A8E6CF, #7FD8BE);
+        background: linear-gradient(135deg, #B2EBD4, #80CBC4);
         color: white;
         box-shadow: $shadow-md;
       }

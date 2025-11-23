@@ -10,7 +10,7 @@
     @include card;
     margin: $spacing-lg;
     padding: $spacing-lg;
-    background: linear-gradient(135deg, #FFD93D, #FFC93D);
+    background: linear-gradient(135deg, #FFE680, #FFD54F);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -75,7 +75,7 @@
       
       .category-item {
         padding: $spacing-sm $spacing-xs;
-        background: rgba(255, 217, 61, 0.15);
+        background: rgba(255, 230, 128, 0.15);
         border-radius: $radius-md;
         text-align: center;
         font-size: 24rpx;
@@ -86,7 +86,7 @@
         white-space: nowrap;
         
         &.active {
-          background: linear-gradient(135deg, #FFD93D, #FFC93D);
+          background: linear-gradient(135deg, #FFF59D, #FFE082);
           color: white;
         }
       }
@@ -113,7 +113,7 @@
       
       .tag-item {
         padding: 6rpx 4rpx;
-        background: rgba(255, 217, 61, 0.15);
+        background: rgba(255, 230, 128, 0.15);
         border-radius: $radius-lg;
         font-size: 20rpx;
         color: $text-sub;
@@ -124,7 +124,7 @@
         white-space: nowrap;
         
         &.active {
-          background: linear-gradient(135deg, #FFD93D, #FFC93D);
+          background: linear-gradient(135deg, #FFF59D, #FFE082);
           color: white;
           border-color: transparent;
         }

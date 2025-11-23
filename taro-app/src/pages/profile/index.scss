@@ -7,7 +7,7 @@
   padding-bottom: 150rpx;
   
   .user-header {
-    background: white;
+    background: linear-gradient(135deg, #D4B5E8, #BA68C8);
     padding: $spacing-xl $spacing-lg $spacing-lg;
     border-radius: 0 0 60rpx 60rpx;
     box-shadow: $shadow-card;
@@ -23,16 +23,17 @@
       .page-title {
         font-size: 40rpx;
         font-weight: 900;
-        color: $text-main;
+        color: white;
       }
       
       .settings-btn {
         width: 64rpx;
         height: 64rpx;
-        background: $bg;
+        background: rgba(255, 255, 255, 0.3);
         border-radius: 50%;
         @include flex-center;
         font-size: 32rpx;
+        color: white;
       }
     }
     
@@ -71,13 +72,13 @@
         .user-name {
           font-size: 36rpx;
           font-weight: 900;
-          color: $text-main;
+          color: white;
           display: block;
         }
         
         .family-id {
           margin-top: $spacing-xs;
-          background: $bg;
+          background: rgba(255, 255, 255, 0.3);
           padding: 6rpx 12rpx;
           border-radius: $radius-sm;
           display: inline-block;
@@ -85,7 +86,7 @@
           text {
             font-size: 18rpx;
             font-weight: bold;
-            color: $text-light;
+            color: white;
           }
         }
       }
