@@ -16,25 +16,62 @@
         height: 100%;
       }
       
+      .top-actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: $spacing-lg;
+        display: flex;
+        justify-content: space-between;
+        z-index: 10;
+        
+        .action-btn {
+          width: 64rpx;
+          height: 64rpx;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(10rpx);
+          @include flex-center;
+          color: white;
+          font-size: 32rpx;
+          font-weight: bold;
+          
+          &.back-btn {
+            font-size: 40rpx;
+          }
+          
+          &.share-btn {
+            font-size: 36rpx;
+            letter-spacing: -4rpx;
+          }
+        }
+      }
+      
       .info-overlay {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         padding: $spacing-xl $spacing-lg;
-        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
         
         .dish-name {
           display: block;
           font-size: 48rpx;
           font-weight: bold;
           color: white;
-          margin-bottom: $spacing-xs;
+          margin-bottom: $spacing-md;
         }
         
-        .dish-meta {
-          font-size: 24rpx;
-          color: rgba(255,255,255,0.9);
+        .meta-row {
+          display: flex;
+          gap: $spacing-lg;
+          
+          .meta-item {
+            font-size: 24rpx;
+            color: rgba(255,255,255,0.9);
+          }
         }
       }
     }

@@ -132,15 +132,42 @@ export default function DishDetailPage() {
     })
   }
   
+  const handleBack = () => {
+    Taro.navigateBack()
+  }
+  
+  const handleShare = () => {
+    Taro.showShareMenu({
+      withShareTicket: true,
+      showShareItems: ['wechatFriends', 'wechatMoment']
+    })
+    Taro.showToast({
+      title: '点击右上角分享',
+      icon: 'none'
+    })
+  }
+  
   if (!isEditing) {
     return (
       <View className="dish-detail-page">
         <View className="detail-section">
           <View className="cover-section">
             <Image className="cover-image" src={dish.cover} mode="aspectFill" />
+            <View className="top-actions">
+              <View className="action-btn back-btn" onClick={handleBack}>
+                <Text>←</Text>
+              </View>
+              <View className="action-btn share-btn" onClick={handleShare}>
+                <Text>⋯</Text>
+              </View>
+            </View>
             <View className="info-overlay">
               <Text className="dish-name">{dish.name}</Text>
-              <Text className="dish-meta">{dish.time}分钟 · {category?.icon} {category?.name}</Text>
+              <View className="meta-row">
+                <Text className="meta-item">⏱ {dish.time}分钟</Text>
+                <Text className="meta-item">{category?.icon} {category?.name}</Text>
+                <Text className="meta-item">🔥 {dish.calories || 0}卡</Text>
+              </View>
             </View>
           </View>
           
