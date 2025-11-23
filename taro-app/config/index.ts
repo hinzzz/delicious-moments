@@ -25,7 +25,10 @@ export default {
     prebundle: { enable: false }
   },
   cache: {
-    enable: true
+    enable: true,
+    buildDependencies: {
+      config: [__filename]
+    }
   },
   alias: {
     '@': path.resolve(__dirname, '..', 'src')

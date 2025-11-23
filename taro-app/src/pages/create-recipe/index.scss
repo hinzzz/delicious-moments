@@ -15,6 +15,79 @@
       border-radius: $radius-lg;
       margin-bottom: $spacing-md;
       
+      &.cover-section {
+        display: flex;
+        gap: $spacing-lg;
+        
+        .cover-upload {
+          position: relative;
+          width: 200rpx;
+          height: 200rpx;
+          flex-shrink: 0;
+          
+          .cover-image {
+            width: 100%;
+            height: 100%;
+            border-radius: $radius-md;
+            background: $bg;
+          }
+          
+          .upload-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: $spacing-xs;
+            border-radius: 0 0 $radius-md $radius-md;
+            
+            .upload-text {
+              font-size: 20rpx;
+            }
+          }
+        }
+        
+        .basic-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: $spacing-md;
+          
+          .name-input {
+            background: rgb(250, 244, 227);
+            padding: $spacing-md;
+            border-radius: $radius-md;
+            font-size: 32rpx;
+            font-weight: bold;
+          }
+          
+          .time-input-wrapper {
+            position: relative;
+            max-width: 200rpx;
+            
+            .time-input {
+              background: rgb(250, 244, 227);
+              padding: $spacing-md;
+              padding-right: 70rpx;
+              border-radius: $radius-md;
+              font-size: 28rpx;
+            }
+            
+            .time-unit {
+              position: absolute;
+              right: $spacing-md;
+              top: 50%;
+              transform: translateY(-50%);
+              font-size: 24rpx;
+              color: $text-sub;
+              pointer-events: none;
+            }
+          }
+        }
+      }
+      
       .label {
         display: block;
         font-size: 24rpx;
@@ -27,6 +100,11 @@
         @include flex-between;
         margin-bottom: $spacing-sm;
         
+        .label-hint {
+          font-size: 22rpx;
+          color: $text-light;
+        }
+        
         .add-ingredient-btn {
           font-size: 24rpx;
           color: $primary;
@@ -34,12 +112,69 @@
         }
       }
       
+      .selected-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-md;
+        
+        .selected-tag {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          padding: $spacing-sm $spacing-md;
+          background: $primary;
+          color: white;
+          border-radius: $radius-md;
+          font-size: 24rpx;
+          
+          .remove-tag {
+            font-size: 32rpx;
+            font-weight: bold;
+            margin-left: $spacing-xs;
+          }
+        }
+      }
+      
+      .custom-tag-input {
+        display: flex;
+        gap: $spacing-sm;
+        margin-top: $spacing-md;
+        
+        .tag-input {
+          flex: 1;
+          background: $bg;
+          padding: $spacing-sm $spacing-md;
+          border-radius: $radius-md;
+          font-size: 24rpx;
+        }
+        
+        .add-tag-btn {
+          padding: $spacing-sm $spacing-lg;
+          background: $primary;
+          color: white;
+          border-radius: $radius-md;
+          font-size: 24rpx;
+          font-weight: bold;
+          @include flex-center;
+        }
+      }
+      
       .input {
-        background: $bg;
+        background: rgb(250, 244, 227);
         padding: $spacing-md;
         border-radius: $radius-md;
         font-size: 28rpx;
         width: 100%;
+      }
+      
+      .textarea {
+        background: rgb(250, 244, 227);
+        padding: $spacing-md;
+        border-radius: $radius-md;
+        font-size: 28rpx;
+        width: 100%;
+        min-height: 120rpx;
       }
       
       .category-list {
@@ -58,6 +193,25 @@
           &.active {
             background: $secondary;
             color: white;
+          }
+          
+          &.add-custom {
+            color: $secondary;
+            border: 2rpx dashed $secondary;
+            background: transparent;
+          }
+        }
+        
+        .custom-category-input {
+          flex: 1;
+          min-width: 200rpx;
+          
+          .category-input {
+            background: #fff8e1;
+            padding: $spacing-sm $spacing-md;
+            border-radius: $radius-md;
+            font-size: 24rpx;
+            border: 2rpx solid $secondary;
           }
         }
       }
@@ -78,6 +232,36 @@
             background: $primary;
             color: white;
           }
+          
+          &.custom {
+            border: 2rpx solid $primary;
+            background: white;
+            color: $primary;
+            
+            &.active {
+              background: $primary;
+              color: white;
+            }
+          }
+          
+          &.add-custom {
+            color: $primary;
+            border: 2rpx dashed $primary;
+            background: transparent;
+          }
+        }
+        
+        .custom-tag-inline {
+          flex: 1;
+          min-width: 150rpx;
+          
+          .tag-input-inline {
+            background: #fff3e0;
+            padding: $spacing-sm $spacing-md;
+            border-radius: $radius-md;
+            font-size: 24rpx;
+            border: 2rpx solid $primary;
+          }
         }
       }
       
@@ -90,7 +274,7 @@
           
           .ing-name {
             flex: 2;
-            background: $bg;
+            background: rgb(250, 244, 227);
             padding: $spacing-sm;
             border-radius: $radius-sm;
             font-size: 24rpx;
@@ -98,7 +282,7 @@
           
           .ing-quantity {
             flex: 1;
-            background: $bg;
+            background: rgb(250, 244, 227);
             padding: $spacing-sm;
             border-radius: $radius-sm;
             font-size: 24rpx;
@@ -107,7 +291,7 @@
           
           .ing-unit {
             flex: 1;
-            background: $bg;
+            background: rgb(250, 244, 227);
             padding: $spacing-sm;
             border-radius: $radius-sm;
             font-size: 24rpx;

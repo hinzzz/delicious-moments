@@ -17,7 +17,8 @@ export const CATEGORIES: Category[] = [
   { id: 'c1', name: '热菜', icon: '🥘' },
   { id: 'c2', name: '凉菜', icon: '🥗' },
   { id: 'c3', name: '汤羹', icon: '🥣' },
-  { id: 'c4', name: '甜点/主食', icon: '🍮' },
+  { id: 'c4', name: '甜点', icon: '🍮' },
+  { id: 'c5', name: '主食', icon: '🍚' },
 ];
 
 export const DISHES: Dish[] = [
@@ -108,7 +109,7 @@ export const DISHES: Dish[] = [
     calories: 320,
     time: 10,
     tags: ['减脂', '快手'],
-    categoryId: 'c4',
+    categoryId: 'c5',
     cookedCount: 15,
     lastRating: 5,
     ingredients: [
@@ -141,7 +142,7 @@ export const DISHES: Dish[] = [
     calories: 350,
     time: 15,
     tags: ['鲜美', '早餐'],
-    categoryId: 'c4',
+    categoryId: 'c5',
     cookedCount: 4,
     lastRating: 5,
     ingredients: [
