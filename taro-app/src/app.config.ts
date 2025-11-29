@@ -9,6 +9,7 @@ export default defineAppConfig({
     'pages/shopping-list/index',
     'pages/create-recipe/index',
     'pages/category-manager/index',
+    'pages/tag-manager/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -25,7 +26,7 @@ export default defineAppConfig({
     list: [
       {
         pagePath: 'pages/home/index',
-        text: '明日菜单',
+        text: '菜单',
         iconPath: 'assets/icons/calendar.png',
         selectedIconPath: 'assets/icons/calendar-active.png'
       },

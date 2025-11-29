@@ -15,6 +15,7 @@ export default function MenuSelectPage() {
   const [selectedCounts, setSelectedCounts] = useState<Record<string, number>>({})
   const [showCart, setShowCart] = useState(false)
   const mealTime = (router.params.mealTime || 'lunch') as MealType
+  const day = (router.params.day || 'tomorrow') as 'today' | 'tomorrow'
   
   // 获取所有标签
   const allTags = Array.from(new Set(dishes.flatMap(d => d.tags)))
@@ -61,6 +62,7 @@ export default function MenuSelectPage() {
             dish,
             selectorId: selectedUserId,
             mealTime,
+            day,
             date: new Date().toISOString()
           })
         }
@@ -117,7 +119,6 @@ export default function MenuSelectPage() {
       
       {allTags.length > 0 && (
         <View className="tags-section">
-          <Text className="tags-title">标签筛选：</Text>
           <View className="tags-grid">
             {allTags.slice(0, 10).map(tag => (
               <View

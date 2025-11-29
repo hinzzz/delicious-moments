@@ -42,6 +42,7 @@ export interface MenuItem {
   dish: Dish;
   selectorId: string; // User ID
   mealTime: MealType;
+  day: 'today' | 'tomorrow'; // 今日或明日
   date: string; // simplified to just a marker in this version
 }
 

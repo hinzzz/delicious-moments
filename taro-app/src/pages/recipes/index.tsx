@@ -102,7 +102,6 @@ export default function RecipesPage() {
       
       {allTags.length > 0 && (
         <View className="tags-section">
-          <Text className="tags-title">标签筛选：</Text>
           <View className="tags-list">
             {allTags.slice(0, 10).map(tag => (
               <View
@@ -123,7 +122,9 @@ export default function RecipesPage() {
             <Text className="empty-text">暂无菜谱</Text>
           </View>
         ) : (
-          filteredDishes.map(dish => (
+          filteredDishes.map(dish => {
+            const category = categories.find(c => c.id === dish.categoryId)
+            return (
             <View
               key={dish.id}
               className="dish-card"
@@ -131,7 +132,14 @@ export default function RecipesPage() {
             >
               <Image className="dish-cover" src={dish.cover} mode="aspectFill" />
               <View className="dish-info">
-                <Text className="dish-name">{dish.name}</Text>
+                <View className="dish-title-row">
+                  <Text className="dish-name">{dish.name}</Text>
+                  {category && (
+                    <View className="dish-category">
+                      <Text>{category.icon} {category.name}</Text>
+                    </View>
+                  )}
+                </View>
                 <View className="dish-meta">
                   <Text className="dish-time">⏱ {dish.time}分钟</Text>
                   {dish.tags.length > 0 && (
@@ -150,7 +158,8 @@ export default function RecipesPage() {
                 <Text className="delete-icon">×</Text>
               </View>
             </View>
-          ))
+          )
+          })
         )}
       </View>
       

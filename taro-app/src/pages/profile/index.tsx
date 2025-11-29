@@ -8,9 +8,8 @@ export default function ProfilePage() {
   const currentUser = users[0]
   
   const menuItems = [
-    { label: '消息通知', icon: '🔔', color: 'blue' },
-    { label: '饮食偏好设置', icon: '👨‍🍳', color: 'orange' },
     { label: '分类管理', icon: '📂', color: 'green', path: '/pages/category-manager/index' },
+    { label: '标签管理', icon: '🏷️', color: 'orange', path: '/pages/tag-manager/index' },
     { label: '关于食光集', icon: '📖', color: 'purple' },
     { label: '退出登录', icon: '🚪', color: 'gray' },
   ]

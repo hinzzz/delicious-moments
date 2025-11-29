@@ -3,15 +3,18 @@ import { useState, useMemo } from 'react'
 import { useStore } from '../../store'
 import './index.scss'
 
-type TimeRange = 'week' | 'month' | 'year'
+type TimeRange = 'thisWeek' | 'lastWeek' | 'history'
+type WeekDay = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 
 export default function SummaryPage() {
-  const { dishes, users } = useStore()
-  const [range, setRange] = useState<TimeRange>('week')
+  const { dishes, users, categories } = useStore()
+  const [range, setRange] = useState<TimeRange>('thisWeek')
+  const [activeDay, setActiveDay] = useState<WeekDay>('mon')
+  const [likedItems, setLikedItems] = useState<Set<number>>(new Set())
   
   // 统计数据
   const stats = useMemo(() => {
-    const base = range === 'week' ? 12 : range === 'month' ? 45 : 520
+    const base = range === 'thisWeek' ? 12 : range === 'lastWeek' ? 15 : 520
     const topDish = dishes.reduce((max, dish) => 
       dish.cookedCount > max.cookedCount ? dish : max
     , dishes[0] || { name: '暂无', cookedCount: 0 })
@@ -26,28 +29,46 @@ export default function SummaryPage() {
   // 历史记录
   const historyDishes = useMemo(() => {
     const items = []
-    const count = range === 'week' ? 5 : range === 'month' ? 12 : 20
+    const count = range === 'history' ? 20 : 3
     const meals = ['早餐', '午餐', '晚餐']
-    const weekDays = ['一', '二', '三', '四', '五', '六', '日']
     
     for (let i = 0; i < Math.min(count, dishes.length); i++) {
       const dish = dishes[i % dishes.length]
       items.push({
         id: i,
         dish,
-        date: `${range === 'week' ? '周' : ''}${weekDays[i % 7]}`,
         meal: meals[i % 3],
         chef: users[i % users.length]
       })
     }
     return items
-  }, [range, dishes, users])
+  }, [range, activeDay, dishes, users])
   
   const ranges: { id: TimeRange; label: string }[] = [
-    { id: 'week', label: '本周' },
-    { id: 'month', label: '本月' },
-    { id: 'year', label: '本年' },
+    { id: 'thisWeek', label: '本周' },
+    { id: 'lastWeek', label: '上周' },
+    { id: 'history', label: '历史' },
   ]
+  
+  const weekDays: { id: WeekDay; label: string }[] = [
+    { id: 'mon', label: '周一' },
+    { id: 'tue', label: '周二' },
+    { id: 'wed', label: '周三' },
+    { id: 'thu', label: '周四' },
+    { id: 'fri', label: '周五' },
+    { id: 'sat', label: '周六' },
+    { id: 'sun', label: '周日' },
+  ]
+  
+  const handleLike = (itemId: number) => {
+    const newLiked = new Set(likedItems)
+    if (newLiked.has(itemId)) {
+      newLiked.delete(itemId)
+    } else {
+      newLiked.add(itemId)
+    }
+    setLikedItems(newLiked)
+  }
   
   return (
     <View className="summary-page">
@@ -79,6 +100,74 @@ export default function SummaryPage() {
             <Text>{r.label}</Text>
           </View>
         ))}
+      </View>
+      
+      {/* 周几切换 - 仅在本周/上周显示 */}
+      {range !== 'history' && (
+        <View className="weekday-switcher">
+          {weekDays.map(day => (
+            <View
+              key={day.id}
+              className={`weekday-btn ${activeDay === day.id ? 'active' : ''}`}
+              onClick={() => setActiveDay(day.id)}
+            >
+              <Text>{day.label}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+      
+      {/* 历史记录 */}
+      <View className="history-section">
+        <View className="history-card">
+          <View className="history-header">
+            <Text className="history-icon">📜</Text>
+            <Text className="history-title">点了什么菜</Text>
+          </View>
+          <View className="history-list">
+            {historyDishes.map((item) => {
+              const category = categories.find(c => c.id === item.dish.categoryId)
+              return (
+              <View key={item.id} className="history-item">
+                <Image className="dish-cover" src={item.dish.cover} mode="aspectFill" />
+                <View className="dish-info">
+                  <View className="dish-title-row">
+                    <Text className="dish-name">{item.dish.name}</Text>
+                    {category && (
+                      <View className="dish-category">
+                        <Text>{category.icon} {category.name}</Text>
+                      </View>
+                    )}
+                  </View>
+                  <View className="dish-meta">
+                    <View className="meal-tag">
+                      <Text>{item.meal}</Text>
+                    </View>
+                    {item.dish.tags.length > 0 && (
+                      <View className="dish-tags">
+                        {item.dish.tags.slice(0, 2).map((tag, idx) => (
+                          <View key={idx} className="dish-tag">
+                            <Text>{tag}</Text>
+                          </View>
+                        ))}
+                      </View>
+                    )}
+                  </View>
+                </View>
+                <View className="item-actions">
+                  <View 
+                    className={`like-btn ${likedItems.has(item.id) ? 'liked' : ''}`}
+                    onClick={() => handleLike(item.id)}
+                  >
+                    <Text className="like-icon">{likedItems.has(item.id) ? '❤️' : '🤍'}</Text>
+                  </View>
+                  <Image className="chef-avatar" src={item.chef.avatar} mode="aspectFill" />
+                </View>
+              </View>
+            )
+            })}
+          </View>
+        </View>
       </View>
       
       <View className="content">
@@ -142,31 +231,6 @@ export default function SummaryPage() {
                 </View>
               </View>
             </View>
-          </View>
-        </View>
-        
-        {/* 历史记录 */}
-        <View className="history-card">
-          <View className="history-header">
-            <Text className="history-icon">📜</Text>
-            <Text className="history-title">点了什么菜</Text>
-          </View>
-          <View className="history-list">
-            {historyDishes.map((item) => (
-              <View key={item.id} className="history-item">
-                <Image className="dish-cover" src={item.dish.cover} mode="aspectFill" />
-                <View className="dish-info">
-                  <Text className="dish-name">{item.dish.name}</Text>
-                  <View className="dish-meta">
-                    <View className="meal-tag">
-                      <Text>{item.meal}</Text>
-                    </View>
-                    <Text className="dish-date">{item.date}</Text>
-                  </View>
-                </View>
-                <Image className="chef-avatar" src={item.chef.avatar} mode="aspectFill" />
-              </View>
-            ))}
           </View>
         </View>
       </View>

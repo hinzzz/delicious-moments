@@ -167,30 +167,49 @@
         flex: 1;
         min-width: 0;
         
-        .dish-name {
-          display: block;
-          font-size: 28rpx;
-          font-weight: bold;
-          color: $text-main;
+        .dish-title-row {
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
           margin-bottom: $spacing-sm;
           overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          
+          .dish-name {
+            font-size: 28rpx;
+            font-weight: bold;
+            color: $text-main;
+            white-space: nowrap;
+            flex-shrink: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          
+          .dish-category {
+            padding: 2rpx 8rpx;
+            background: rgba(255, 245, 157, 0.3);
+            border-radius: $radius-sm;
+            font-size: 18rpx;
+            color: $text-sub;
+            white-space: nowrap;
+            flex-shrink: 0;
+          }
         }
         
         .dish-meta {
           display: flex;
           align-items: center;
-          gap: $spacing-md;
+          gap: $spacing-sm;
           
           .dish-time {
             font-size: 24rpx;
             color: $text-light;
+            flex-shrink: 0;
           }
           
           .dish-tags {
             display: flex;
             gap: $spacing-xs;
+            overflow: hidden;
             
             .dish-tag {
               padding: 4rpx $spacing-sm;

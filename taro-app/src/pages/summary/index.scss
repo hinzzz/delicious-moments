@@ -85,6 +85,30 @@
     }
   }
   
+  .weekday-switcher {
+    margin: 0 $spacing-lg $spacing-lg;
+    display: flex;
+    gap: $spacing-xs;
+    overflow-x: auto;
+    
+    .weekday-btn {
+      flex-shrink: 0;
+      padding: $spacing-sm $spacing-md;
+      background: rgba(178, 235, 212, 0.15);
+      border-radius: $radius-lg;
+      font-size: 22rpx;
+      font-weight: bold;
+      color: $text-sub;
+      transition: all 0.3s;
+      
+      &.active {
+        background: linear-gradient(135deg, #B2EBD4, #80CBC4);
+        color: white;
+        box-shadow: $shadow-sm;
+      }
+    }
+  }
+  
   .content {
     padding: 0 $spacing-lg $spacing-lg;
     
@@ -271,74 +295,90 @@
         }
       }
     }
+  }
+  
+  .history-section {
+    padding: 0 $spacing-lg $spacing-lg;
     
-    .history-card {
-      background: white;
-      border-radius: $radius-xl;
-      padding: $spacing-lg;
-      box-shadow: $shadow-card;
-      margin-bottom: $spacing-lg;
+    .history-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: $spacing-md;
+      padding: 0 $spacing-xs;
       
-      .history-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: $spacing-lg;
-        
-        .history-icon {
-          font-size: 32rpx;
-          margin-right: $spacing-sm;
-        }
-        
-        .history-title {
-          font-size: 28rpx;
-          font-weight: bold;
-          color: $text-main;
-        }
+      .history-icon {
+        font-size: 32rpx;
+        margin-right: $spacing-sm;
       }
       
+      .history-title {
+        font-size: 28rpx;
+        font-weight: bold;
+        color: $text-main;
+      }
+    }
+    
+    .history-card {
       .history-list {
         .history-item {
+          @include card;
+          padding: $spacing-md;
+          margin-bottom: $spacing-sm;
           display: flex;
           align-items: center;
-          padding: $spacing-md 0;
-          border-bottom: 1rpx solid $bg;
-          
-          &:last-child {
-            border-bottom: none;
-          }
           
           .dish-cover {
-            width: 96rpx;
-            height: 96rpx;
-            border-radius: $radius-lg;
+            width: 100rpx;
+            height: 100rpx;
+            border-radius: $radius-md;
             background: $bg;
             flex-shrink: 0;
+            margin-right: $spacing-md;
           }
           
           .dish-info {
             flex: 1;
-            margin-left: $spacing-md;
-            overflow: hidden;
+            min-width: 0;
             
-            .dish-name {
-              font-size: 28rpx;
-              font-weight: bold;
-              color: $text-main;
+            .dish-title-row {
+              display: flex;
+              align-items: center;
+              gap: $spacing-xs;
+              margin-bottom: $spacing-xs;
               overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
+              
+              .dish-name {
+                font-size: 28rpx;
+                font-weight: bold;
+                color: $text-main;
+                white-space: nowrap;
+                flex-shrink: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+              
+              .dish-category {
+                padding: 2rpx 8rpx;
+                background: rgba(178, 235, 212, 0.25);
+                border-radius: $radius-sm;
+                font-size: 18rpx;
+                color: $text-sub;
+                white-space: nowrap;
+                flex-shrink: 0;
+              }
             }
             
             .dish-meta {
               display: flex;
               align-items: center;
-              margin-top: $spacing-xs;
+              gap: $spacing-xs;
               
               .meal-tag {
-                background: $bg;
+                display: inline-block;
                 padding: 4rpx 12rpx;
+                background: rgba(178, 235, 212, 0.2);
                 border-radius: $radius-sm;
-                margin-right: $spacing-sm;
+                flex-shrink: 0;
                 
                 text {
                   font-size: 20rpx;
@@ -346,25 +386,58 @@
                 }
               }
               
-              .dish-date {
-                font-size: 20rpx;
-                color: $text-light;
+              .dish-tags {
+                display: flex;
+                gap: $spacing-xs;
+                overflow: hidden;
+                
+                .dish-tag {
+                  padding: 2rpx 8rpx;
+                  background: rgba(178, 235, 212, 0.15);
+                  border-radius: $radius-sm;
+                  font-size: 18rpx;
+                  color: $text-sub;
+                  white-space: nowrap;
+                }
               }
             }
           }
           
-          .chef-avatar {
-            width: 48rpx;
-            height: 48rpx;
-            border-radius: 50%;
-            border: 2rpx solid white;
-            box-shadow: $shadow-sm;
+          .item-actions {
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
             flex-shrink: 0;
+            
+            .like-btn {
+              width: 48rpx;
+              height: 48rpx;
+              @include flex-center;
+              
+              .like-icon {
+                font-size: 32rpx;
+                transition: transform 0.2s;
+              }
+              
+              &.liked .like-icon {
+                animation: heartBeat 0.3s;
+              }
+            }
+            
+            .chef-avatar {
+              width: 48rpx;
+              height: 48rpx;
+              border-radius: 50%;
+              border: 2rpx solid white;
+              box-shadow: $shadow-sm;
+            }
           }
         }
       }
     }
-    
+  }
+  
+  .content {
     .chef-card {
       background: linear-gradient(135deg, #FFF0E6 0%, white 100%);
       border-radius: $radius-xl;

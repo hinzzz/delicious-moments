@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-.category-manager-page {
+.tag-manager-page {
   min-height: 100vh;
   background: $bg;
   padding: $spacing-lg;
@@ -17,8 +17,20 @@
     }
   }
   
-  .category-list {
-    .category-item {
+  .tag-list {
+    .empty-state {
+      @include card;
+      padding: 80rpx $spacing-lg;
+      text-align: center;
+      margin-top: $spacing-sm;
+      
+      .empty-text {
+        font-size: 28rpx;
+        color: $text-light;
+      }
+    }
+    
+    .tag-item {
       @include card;
       padding: $spacing-lg;
       margin-bottom: $spacing-sm;
@@ -26,19 +38,20 @@
       .view-mode {
         @include flex-between;
         
-        .cat-info {
-          display: flex;
-          align-items: center;
+        .tag-info {
+          flex: 1;
           
-          .cat-icon {
-            font-size: 40rpx;
-            margin-right: $spacing-md;
-          }
-          
-          .cat-name {
+          .tag-name {
+            display: block;
             font-size: 28rpx;
             font-weight: bold;
             color: $text-main;
+            margin-bottom: $spacing-xs;
+          }
+          
+          .tag-count {
+            font-size: 24rpx;
+            color: $text-light;
           }
         }
         
@@ -55,7 +68,7 @@
           
           .edit-btn {
             background: $bg;
-            color: $primary;
+            color: #FFB300;
           }
           
           .delete-btn {
@@ -80,7 +93,7 @@
         
         .save-btn {
           padding: $spacing-md $spacing-lg;
-          background: $primary;
+          background: linear-gradient(135deg, #FFE680, #FFD54F);
           color: white;
           border-radius: $radius-md;
           font-size: 24rpx;
@@ -111,7 +124,7 @@
           }
           
           .confirm-btn {
-            background: $primary;
+            background: linear-gradient(135deg, #FFE680, #FFD54F);
             color: white;
           }
           
@@ -123,7 +136,7 @@
       }
     }
     
-    .add-category-btn {
+    .add-tag-btn {
       padding: $spacing-lg;
       border: 2rpx dashed $text-light;
       border-radius: $radius-lg;
@@ -132,6 +145,7 @@
       font-weight: bold;
       color: $text-light;
       background: white;
+      margin-bottom: $spacing-sm;
     }
   }
 }

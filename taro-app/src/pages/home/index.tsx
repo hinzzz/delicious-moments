@@ -9,19 +9,20 @@ import dinnerIcon from '../../assets/icons/晚餐.png'
 import './index.scss'
 
 export default function HomePage() {
-  const { menuItems, users, loadFromStorage, removeMenuItem } = useStore()
+  const { menuItems, users, categories, loadFromStorage, removeMenuItem } = useStore()
   const [activeMeal, setActiveMeal] = useState<MealType>('breakfast')
+  const [activeDay, setActiveDay] = useState<'today' | 'tomorrow'>('tomorrow')
   
   useEffect(() => {
     loadFromStorage()
   }, [])
   
-  const currentItems = menuItems.filter(m => m.mealTime === activeMeal)
+  const currentItems = menuItems.filter(m => m.mealTime === activeMeal && m.day === activeDay)
   
   const handleAddDish = () => {
-    console.log('点击去点菜，餐次:', activeMeal)
+    console.log('点击去点菜，餐次:', activeMeal, '日期:', activeDay)
     Taro.navigateTo({
-      url: `/pages/menu-select/index?mealTime=${activeMeal}`,
+      url: `/pages/menu-select/index?mealTime=${activeMeal}&day=${activeDay}`,
       success: () => {
         console.log('导航成功')
       },
@@ -62,9 +63,21 @@ export default function HomePage() {
   
   return (
     <View className="home-page">
-      <View className="banner">
-        <Text className="date">10月26日 · 周四</Text>
-        <Text className="title">明日菜单</Text>
+      <View className="banner-wrapper">
+        <View 
+          className={`banner-item ${activeDay === 'today' ? 'active' : ''}`}
+          onClick={() => setActiveDay('today')}
+        >
+          <Text className="date">10月26日 · 周四</Text>
+          <Text className="title">今日菜单</Text>
+        </View>
+        <View 
+          className={`banner-item ${activeDay === 'tomorrow' ? 'active' : ''}`}
+          onClick={() => setActiveDay('tomorrow')}
+        >
+          <Text className="date">10月27日 · 周五</Text>
+          <Text className="title">明日菜单</Text>
+        </View>
       </View>
       
       <View className="meal-tabs">
@@ -99,12 +112,31 @@ export default function HomePage() {
           <>
             {currentItems.map(item => {
               const user = users.find(u => u.id === item.selectorId)
+              const category = categories.find(c => c.id === item.dish.categoryId)
               return (
                 <View key={item.id} className="dish-item">
                   <Image className="dish-image" src={item.dish.cover} mode="aspectFill" />
                   <View className="dish-info">
-                    <Text className="dish-name">{item.dish.name}</Text>
-                    <Text className="dish-time">{item.dish.time}分钟</Text>
+                    <View className="dish-title-row">
+                      <Text className="dish-name">{item.dish.name}</Text>
+                      {category && (
+                        <View className="dish-category">
+                          <Text>{category.icon} {category.name}</Text>
+                        </View>
+                      )}
+                    </View>
+                    <View className="dish-meta">
+                      <Text className="dish-time">{item.dish.time}分钟</Text>
+                      {item.dish.tags.length > 0 && (
+                        <View className="dish-tags">
+                          {item.dish.tags.slice(0, 2).map((tag, idx) => (
+                            <View key={idx} className="dish-tag">
+                              <Text>{tag}</Text>
+                            </View>
+                          ))}
+                        </View>
+                      )}
+                    </View>
                   </View>
                   {user && (
                     <View className="user-badge">

@@ -10,6 +10,11 @@ export default function CategoryManagerPage() {
   const [newCatName, setNewCatName] = useState('')
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editName, setEditName] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+  
+  const filteredCategories = categories.filter(cat => 
+    cat.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
   
   const handleAdd = () => {
     if (newCatName.trim()) {
@@ -61,8 +66,41 @@ export default function CategoryManagerPage() {
   
   return (
     <View className="category-manager-page">
+      <View className="search-bar">
+        <Input
+          className="search-input"
+          placeholder="搜索分类..."
+          value={searchQuery}
+          onInput={(e) => setSearchQuery(e.detail.value)}
+        />
+      </View>
+      
       <View className="category-list">
-        {categories.map(cat => (
+        {isAdding ? (
+          <View className="category-item add-mode">
+            <Input
+              className="add-input"
+              placeholder="新分类名称"
+              value={newCatName}
+              onInput={(e) => setNewCatName(e.detail.value)}
+              focus
+            />
+            <View className="add-actions">
+              <View className="confirm-btn" onClick={handleAdd}>
+                <Text>确定</Text>
+              </View>
+              <View className="cancel-btn" onClick={() => setIsAdding(false)}>
+                <Text>取消</Text>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <View className="add-category-btn" onClick={() => setIsAdding(true)}>
+            <Text>+ 添加新分类</Text>
+          </View>
+        )}
+        
+        {filteredCategories.map(cat => (
           <View key={cat.id} className="category-item">
             {editingId === cat.id ? (
               <View className="edit-mode">
@@ -94,30 +132,6 @@ export default function CategoryManagerPage() {
             )}
           </View>
         ))}
-        
-        {isAdding ? (
-          <View className="category-item add-mode">
-            <Input
-              className="add-input"
-              placeholder="新分类名称"
-              value={newCatName}
-              onInput={(e) => setNewCatName(e.detail.value)}
-              focus
-            />
-            <View className="add-actions">
-              <View className="confirm-btn" onClick={handleAdd}>
-                <Text>确定</Text>
-              </View>
-              <View className="cancel-btn" onClick={() => setIsAdding(false)}>
-                <Text>取消</Text>
-              </View>
-            </View>
-          </View>
-        ) : (
-          <View className="add-category-btn" onClick={() => setIsAdding(true)}>
-            <Text>+ 添加新分类</Text>
-          </View>
-        )}
       </View>
     </View>
   )
